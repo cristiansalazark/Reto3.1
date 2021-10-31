@@ -1,4 +1,3 @@
-
 package com.Reto3.Reto3.Modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,22 +12,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Message")
 public class Message {
-    
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
     private String messageText;
-    
-     @ManyToOne
-    @JoinColumn(name = "id1")
-    @JsonIgnoreProperties("Message")
-    private Quadbike quadbike;
-    
+
     @ManyToOne
-    @JoinColumn(name = "idCliente1")
-    @JsonIgnoreProperties({"message"})
-    private Client client; 
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties({"messages", "client", "reservations"})
+    private Quadbike quadbike;
+
+    @ManyToOne
+    @JoinColumn(name = "idClient")
+    @JsonIgnoreProperties({"messages", "reservations", "client"})
+    private Client client;
 
     public Integer getIdMessage() {
         return idMessage;
@@ -61,6 +59,5 @@ public class Message {
     public void setClient(Client client) {
         this.client = client;
     }
-    
-    
+
 }

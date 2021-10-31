@@ -17,20 +17,20 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer idcategory;
+    private Integer id;
     private String name;
     private String description;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "category")
-    @JsonIgnoreProperties({"category"})
-    private List<Quadbike> quadbike;
+     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="category")
+    @JsonIgnoreProperties("category")
+    private List<Quadbike> quadbikes;
 
-    public Integer getIdcategory() {
-        return idcategory;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdcategory(Integer idcategory) {
-        this.idcategory = idcategory;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,13 +49,18 @@ public class Category {
         this.description = description;
     }
 
-    public List<Quadbike> getQuadbike() {
-        return quadbike;
+    public List<Quadbike> getQuadbikes() {
+        return quadbikes;
     }
 
-    public void setQuadbike(List<Quadbike> quadbike) {
-        this.quadbike = quadbike;
+    public void setQuadbikes(List<Quadbike> quadbikes) {
+        this.quadbikes = quadbikes;
     }
+
+   
+
+  
+
 
   
 

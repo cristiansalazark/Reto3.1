@@ -27,15 +27,25 @@ public class Reservation {
     private Date devolutionDate;
     private String status;
     
-     @ManyToOne
-    @JoinColumn(name = "id")
-    @JsonIgnoreProperties("reservation")
-    private Quadbike quadbike;
-    
     @ManyToOne
-    @JoinColumn(name = "idCliente")
-    @JsonIgnoreProperties({"reservation"})
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties("reservations")
+    private Quadbike quadbike;
+
+    @ManyToOne
+    @JoinColumn(name = "idClient")
+    @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
+    
+    private String score; //depende el grupo
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
 
     public Integer getIdReservation() {
         return idReservation;
@@ -84,6 +94,8 @@ public class Reservation {
     public void setClient(Client client) {
         this.client = client;
     }
+  
+
 
      
 

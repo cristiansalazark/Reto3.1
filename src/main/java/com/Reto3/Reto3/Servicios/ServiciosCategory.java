@@ -27,10 +27,10 @@ public class ServiciosCategory {
     
     
         public Category save(Category cate){
-        if(cate.getIdcategory()==null){
+        if(cate.getId()==null){
             return crud.save(cate);
         }else{
-            Optional<Category> evt=crud.getCategory(cate.getIdcategory());
+            Optional<Category> evt=crud.getCategory(cate.getId());
             if(evt.isEmpty()){
                 return crud.save(cate);
             }else{

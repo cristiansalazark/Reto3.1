@@ -26,10 +26,10 @@ public class ServiciosQuadbike {
     
     
         public Quadbike save(Quadbike Quad){
-        if(Quad.getId_Quadbike()==null){
+        if(Quad.getId()==null){
             return metodoscrud.save(Quad);
         }else{
-            Optional<Quadbike> evt=metodoscrud.getQuadbike(Quad.getId_Quadbike());
+            Optional<Quadbike> evt=metodoscrud.getQuadbike(Quad.getId());
             if(evt.isEmpty()){
                 return metodoscrud.save(Quad);
             }else{
