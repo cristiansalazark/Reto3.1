@@ -37,6 +37,44 @@ public class ServiciosQuadbike {
             }
         }
     }
+        
+          public Quadbike update(Quadbike quadbike){
+        if(quadbike.getId()!=null){
+            Optional<Quadbike> e=metodoscrud.getQuadbike(quadbike.getId());
+            if(!e.isEmpty()){
+                if(quadbike.getName()!=null){
+                    e.get().setName(quadbike.getName());
+                }
+                if(quadbike.getBrand()!=null){
+                    e.get().setBrand(quadbike.getBrand());
+                }
+                if(quadbike.getYear()!=null){
+                    e.get().setYear(quadbike.getYear());
+                }
+                if(quadbike.getDescription()!=null){
+                    e.get().setDescription(quadbike.getDescription());
+                }
+                if(quadbike.getCategory()!=null){
+                    e.get().setCategory(quadbike.getCategory());
+                }
+                metodoscrud.save(e.get());
+                return e.get();
+            }else{
+                return quadbike;
+            }
+        }else{
+            return quadbike;
+        }
+    }
+
+
+    public boolean deleteQuadbike(int quadbikeid) {
+        Boolean aBoolean = getQuadbike(quadbikeid).map(cabin -> {
+            metodoscrud.delete(cabin);
+            return true;
+        }).orElse(false);
+        return aBoolean;
+    }
 
  
 

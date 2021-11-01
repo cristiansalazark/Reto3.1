@@ -38,6 +38,28 @@ public class ServiciosCategory {
             }
         }
     }
+        public Category update(Category categoria){
+        if(categoria.getId()!=null){
+            Optional<Category>g=crud.getCategory(categoria.getId());
+            if(!g.isEmpty()){
+                if(categoria.getDescription()!=null){
+                    g.get().setDescription(categoria.getDescription());
+                }
+                if(categoria.getName()!=null){
+                    g.get().setName(categoria.getName());
+                }
+                return crud.save(g.get());
+            }
+        }
+        return categoria;
+    }
+    public boolean deletecategoria(int categoriaId){
+        Boolean d=getCategory(categoriaId).map(categoria -> {
+            crud.delete(categoria);
+            return true;
+        }).orElse(false);
+        return d;
+    }
      
      
 }

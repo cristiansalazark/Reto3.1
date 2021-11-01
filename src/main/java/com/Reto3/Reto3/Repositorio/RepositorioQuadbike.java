@@ -1,6 +1,7 @@
 package com.Reto3.Reto3.Repositorio;
 
 import com.Reto3.Reto3.Interfaces.InterfaceQuadbike;
+import com.Reto3.Reto3.Modelo.Client;
 import com.Reto3.Reto3.Modelo.Quadbike;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,9 @@ public class RepositorioQuadbike {
     
      public Quadbike save(Quadbike Quad){
         return crud.save(Quad);
+    }
+      public void delete(Quadbike Quad){
+       crud.delete(Quad);
     }
      
      

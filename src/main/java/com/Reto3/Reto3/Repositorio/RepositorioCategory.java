@@ -28,6 +28,10 @@ public class RepositorioCategory {
      public Category save(Category cate){
         return crud.save(cate);
     }
+      
+    public void delete(Category Cate){
+       crud.delete(Cate);
+    }
      
     
     

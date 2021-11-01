@@ -39,4 +39,36 @@ public class ServiciosReservation {
             }
         }
     }
+        
+         public Reservation update(Reservation reservation){
+        if(reservation.getIdReservation()!=null){
+            Optional<Reservation> e= metodoscrudr.getReservation(reservation.getIdReservation());
+            if(!e.isEmpty()){
+
+                if(reservation.getStartDate()!=null){
+                    e.get().setStartDate(reservation.getStartDate());
+                }
+                if(reservation.getDevolutionDate()!=null){
+                    e.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                if(reservation.getStatus()!=null){
+                    e.get().setStatus(reservation.getStatus());
+                }
+                metodoscrudr.save(e.get());
+                return e.get();
+            }else{
+                return reservation;
+            }
+        }else{
+            return reservation;
+        }
+    }
+
+    public boolean deleteReservation(int reservationId) {
+        Boolean aBoolean = getReservation(reservationId).map(reservation -> {
+            metodoscrudr.delete(reservation);
+            return true;
+        }).orElse(false);
+        return aBoolean;
+    }
 }
