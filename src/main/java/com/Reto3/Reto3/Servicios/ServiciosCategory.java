@@ -1,6 +1,13 @@
 
 package com.Reto3.Reto3.Servicios;
-
+/**
+ * <h1>category </h1>
+ * Clase servicioscategory crea los servicios de guardar crear eliminar y consultar.
+ * @since 06-11-2021
+ * @version 1.0
+ * @author Cristian David Salazar Aponte
+ *
+ */
 import com.Reto3.Reto3.Modelo.Category;
 import com.Reto3.Reto3.Repositorio.RepositorioCategory;
 import java.util.List;
@@ -17,13 +24,27 @@ public class ServiciosCategory {
      
        private RepositorioCategory  crud;
      
+     /**
+      * obtiene la lista de category
+      * @return retorna la lista category
+      */
       public List<Category > getAll(){
         return crud.getAll();
     }
+      /**
+       * obtiene category por id
+       * @param id
+       * @return regresa la category vinculada a el ip 
+       */
 
     public Optional<Category > getCategory(int id){
         return crud.getCategory(id);
     }
+    /**
+     * crea la categoria 
+     * @param cate
+     * @return regresa la categoria creada 
+     */
     
     
         public Category save(Category cate){
@@ -38,6 +59,11 @@ public class ServiciosCategory {
             }
         }
     }
+        /**
+         * modifica la categoria 
+         * @param categoria
+         * @return retorna los cambios echos en categoria 
+         */
         public Category update(Category categoria){
         if(categoria.getId()!=null){
             Optional<Category>g=crud.getCategory(categoria.getId());
@@ -53,6 +79,11 @@ public class ServiciosCategory {
         }
         return categoria;
     }
+        /**
+         * elimina la categoria por id 
+         * @param categoriaId
+         * @return regresa la categoria vinculada por el id
+         */
     public boolean deletecategoria(int categoriaId){
         Boolean d=getCategory(categoriaId).map(categoria -> {
             crud.delete(categoria);

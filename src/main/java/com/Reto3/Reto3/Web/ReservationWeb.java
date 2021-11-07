@@ -1,6 +1,16 @@
 
 package com.Reto3.Reto3.Web;
 
+
+/**
+ * <h1>reservation  </h1>
+ * Clase reservationweb declara las sentencias de mapeo consultar.
+ *
+ * @since 06-11-2021
+ * @version 1.0
+ * @author Cristian David Salazar Aponte
+ *
+ */
 import com.Reto3.Reto3.Modelo.Reservation;
 import com.Reto3.Reto3.Servicios.ServiciosReservation;
 import java.util.List;
@@ -24,38 +34,65 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 
 public class ReservationWeb {
-    
+    /**
+     * peticion saludo
+     * @return  respuesta saludo
+     */
+     
     @GetMapping("/hola")
     
     public String saludar(){
           return "hola mundo";
     }
     
-    
+    /**
+     * mapeo sewrviciosreservation
+     */
     @Autowired
     private ServiciosReservation servicioreserv;
     @GetMapping("/all")
     
-    
+    /**
+     * lista de reservation
+     */
     public List <Reservation>getReservation(){
         return servicioreserv.getAll();
     }
     
+    /**
+     * obtiene reservation
+     * @param idreserv
+     * @return  regresa reservation por id 
+     */
        @GetMapping("/{id}")
     public Optional<Reservation> getReservation(@PathVariable("id") int idreserv){
         return servicioreserv.getReservation(idreserv);
     }
-    
+    /**
+     * crea reservation
+     * @param reserv
+     * @return regresa reservation creado
+     */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservation save(@RequestBody Reservation reserv){
         return servicioreserv.save(reserv);
     }
+    /**
+     * actualiza reservation
+     * @param reservation
+     * @return retorna reservation actualizad0
+     */
      @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public Reservation update(@RequestBody Reservation reservation) {
         return servicioreserv.update(reservation);
     }
+    /**
+     * elimina reservation por id 
+     * @param reservationId
+     * @return  retorna el reservation por id
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int reservationId) {
