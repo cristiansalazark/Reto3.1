@@ -12,6 +12,8 @@ package com.Reto3.Reto3.Web;
  *
  */
 import com.Reto3.Reto3.Modelo.Reservation;
+import com.Reto3.Reto3.Reportes.ContadorClientes;
+import com.Reto3.Reto3.Reportes.StatusReservas;
 import com.Reto3.Reto3.Servicios.ServiciosReservation;
 import java.util.List;
 import java.util.Optional;
@@ -98,5 +100,30 @@ public class ReservationWeb {
     public boolean delete(@PathVariable("id") int reservationId) {
         return servicioreserv.deleteReservation(reservationId);
     }
-    
+    /**
+     * genera el reporte  de status
+     * @return retorna el reporte generado
+     */
+    @GetMapping("/report-status")
+    public StatusReservas getReservas(){
+        return servicioreserv.reporteStatusServicio();
+    }
+    /**
+     * genera el reporte de  fechas
+     * @param dateOne
+     * @param dateTwo
+     * @return retorna reporte grenerado
+     */
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+     public List<Reservation> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+         return servicioreserv.reporteTiempoServicio(dateOne, dateTwo);
+     }
+     /**
+      * reporte cliente
+      * @return retorna el reporte generado de clients
+      */
+     @GetMapping("/report-clients")
+     public List<ContadorClientes> getClientes(){
+         return servicioreserv.reporteClientesServicio();
+     }
 }

@@ -11,7 +11,13 @@ package com.Reto3.Reto3.Servicios;
  *
  */
 import com.Reto3.Reto3.Modelo.Reservation;
+import com.Reto3.Reto3.Reportes.ContadorClientes;
+import com.Reto3.Reto3.Reportes.StatusReservas;
 import com.Reto3.Reto3.Repositorio.RepositorioReservation;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,4 +107,51 @@ public class ServiciosReservation {
         }).orElse(false);
         return aBoolean;
     }
+    
+    
+    /**
+     * declara la lista de estados completed o cancelled
+     * @return 
+     */
+    public StatusReservas reporteStatusServicio (){
+        List<Reservation>completed= metodoscrudr.ReservacionStatusRepositorio("completed");
+        List<Reservation>cancelled= metodoscrudr.ReservacionStatusRepositorio("cancelled");
+        
+        return new StatusReservas(completed.size(), cancelled.size() );
+    }
+    /**
+     * genera el reporte del tiempo de servicio
+     * @param datoA
+     * @param datoB
+     * @return retorna el reporte generado de tiempo de servicio
+     */
+    
+    public List<Reservation> reporteTiempoServicio (String datoA, String datoB){
+        SimpleDateFormat parser = new SimpleDateFormat ("yyyy-MM-dd");
+        
+        Date datoUno = new Date();
+        Date datoDos = new Date();
+        
+        try{
+             datoUno = parser.parse(datoA);
+             datoDos = parser.parse(datoB);
+        }catch(ParseException evt){
+            evt.printStackTrace();
+        }if(datoUno.before(datoDos)){
+            return metodoscrudr.ReservacionTiempoRepositorio(datoUno, datoDos);
+        }else{
+            return new ArrayList<>();
+        
+        } 
+    } 
+    
+    /**
+     * reporte de servicio de clientes
+     * @return 
+     */
+     public List<ContadorClientes> reporteClientesServicio(){
+            return metodoscrudr.getClientesRepositorio();
+        } 
+    
+    
 }

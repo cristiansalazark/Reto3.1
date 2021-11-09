@@ -9,7 +9,11 @@ package com.Reto3.Reto3.Repositorio;
  *
  */
 import com.Reto3.Reto3.Interfaces.InterfaceReservation;
+import com.Reto3.Reto3.Modelo.Client;
 import com.Reto3.Reto3.Modelo.Reservation;
+import com.Reto3.Reto3.Reportes.ContadorClientes;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +56,36 @@ public class RepositorioReservation {
        public void delete(Reservation Quad){
        crud.delete(Quad);
     }
+     /**
+      * genera  la lista del estatus de reservacion
+      * @param status
+      * @return 
+      */
+      public List<Reservation> ReservacionStatusRepositorio (String status){
+         return crud.findAllByStatus(status);
+     }
+     /**
+      * genera el  los tiempos del repositorio
+      * @param a fecha 1
+      * @param b fecha 2
+      * @return retorna los 2 tiempos
+      */
+     public List<Reservation> ReservacionTiempoRepositorio (Date a, Date b){
+         return crud.findAllByStartDateAfterAndStartDateBefore(a, b);
      
-    
+     }
+     /**
+      * obtyiene los clientes del repositorio
+      * @return 
+      */
+     public List<ContadorClientes> getClientesRepositorio(){
+         List<ContadorClientes> res = new ArrayList<>();
+         List<Object[]> report = crud.countTotalReservationsByClient();
+         for(int i=0; i<report.size(); i++){
+             res.add(new ContadorClientes((Long)report.get(i)[1],(Client) report.get(i)[0]));
+         }
+         return res;
+     }
     
     
     

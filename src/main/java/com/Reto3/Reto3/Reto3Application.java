@@ -7,8 +7,12 @@ package com.Reto3.Reto3;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
- * 
- * @author USUARIO
+ * <h1>main </h1>
+ * Clase main corre el programa
+ * @since 06-11-2021
+ * @version 1.0
+ * @author Cristian David Salazar Aponte
+ *
  */
 @SpringBootApplication
 public class Reto3Application {
